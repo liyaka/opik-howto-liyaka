@@ -36,7 +36,7 @@ Open the `openai-agents-insurance-claims` project. After one clean run it holds 
 
 ## Run it yourself
 
-1. Start Opik locally (or point `~/.opik.config` at Comet cloud) and have an OpenAI key.
+1. Start Opik locally (or point `~/.opik.config` at Opik Cloud) and have an OpenAI key.
 2. `cp .env.example .env` and set `OPENAI_API_KEY` (a `.env` one level up also works).
 3. `uv sync`
 4. `uv run main.py` (about 30 seconds)
