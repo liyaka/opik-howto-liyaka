@@ -2,6 +2,7 @@
 
 import asyncio
 import os
+import signal
 import subprocess
 import sys
 from pathlib import Path
@@ -26,7 +27,7 @@ async def main() -> int:
             client = await asyncio.create_subprocess_exec(sys.executable, "client.py", cwd=HERE, env=child_env)
             return await client.wait()
         finally:
-            worker.terminate()
+            worker.send_signal(signal.SIGINT)  # graceful stop: the worker flushes its spans to Opik
             worker.wait(timeout=30)
 
 
