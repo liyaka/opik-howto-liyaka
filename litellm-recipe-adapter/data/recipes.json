@@ -1,0 +1,66 @@
+[
+  {
+    "id": "moonlit-lasagna",
+    "title": "Moonlit Lasagna",
+    "servings": 8,
+    "ingredients": [
+      "12 lasagna sheets (wheat)",
+      "500 g ground beef",
+      "400 g ricotta",
+      "250 g mozzarella",
+      "700 ml tomato passata",
+      "1 onion",
+      "2 cloves garlic",
+      "40 g butter",
+      "40 g plain flour",
+      "500 ml whole milk"
+    ],
+    "steps": [
+      "Brown the beef with onion and garlic, add passata, simmer 20 minutes.",
+      "Make a béchamel from butter, flour and milk.",
+      "Layer sheets, meat sauce, ricotta and béchamel; top with mozzarella.",
+      "Bake at 180 C for 40 minutes."
+    ]
+  },
+  {
+    "id": "juniper-pancakes",
+    "title": "Juniper Hill Pancakes",
+    "servings": 4,
+    "ingredients": [
+      "200 g plain flour",
+      "2 eggs",
+      "300 ml whole milk",
+      "30 g melted butter",
+      "1 tbsp sugar",
+      "1 tsp baking powder",
+      "pinch of salt"
+    ],
+    "steps": [
+      "Whisk flour, sugar, baking powder and salt.",
+      "Beat in eggs, milk and butter until just smooth.",
+      "Fry ladlefuls in a hot pan until golden on both sides."
+    ]
+  },
+  {
+    "id": "saffron-pad-thai",
+    "title": "Saffron Lane Pad Thai",
+    "servings": 2,
+    "ingredients": [
+      "200 g flat rice noodles",
+      "150 g shrimp",
+      "2 eggs",
+      "60 g roasted peanuts",
+      "3 tbsp fish sauce",
+      "2 tbsp tamarind paste",
+      "1 tbsp palm sugar",
+      "2 spring onions",
+      "100 g bean sprouts"
+    ],
+    "steps": [
+      "Soak the noodles until pliable.",
+      "Stir-fry shrimp, push aside, scramble the eggs.",
+      "Add noodles, fish sauce, tamarind and sugar; toss for 2 minutes.",
+      "Finish with peanuts, sprouts and spring onions."
+    ]
+  }
+]

@@ -1,0 +1,8 @@
+[
+  {"recipe": "moonlit-lasagna", "kind": "vegan", "instruction": "Make this recipe fully vegan."},
+  {"recipe": "moonlit-lasagna", "kind": "servings", "instruction": "Halve the servings and scale every quantity."},
+  {"recipe": "juniper-pancakes", "kind": "gluten-free", "instruction": "Make this recipe gluten-free."},
+  {"recipe": "juniper-pancakes", "kind": "allergen-swap", "instruction": "Replace the eggs and the milk so the recipe is safe for someone allergic to both."},
+  {"recipe": "saffron-pad-thai", "kind": "allergen-swap", "instruction": "Remove the peanuts and the shrimp and substitute so it is safe for a nut and shellfish allergy."},
+  {"recipe": "saffron-pad-thai", "kind": "servings", "instruction": "Double the servings and scale every quantity."}
+]

@@ -1,0 +1,17 @@
+[project]
+name = "litellm-recipe-adapter"
+version = "0.1.0"
+description = "Send the same recipe-adaptation requests to two models through LiteLLM and compare cost and latency in Opik"
+requires-python = ">=3.12"
+dependencies = [
+    "litellm>=1.79",
+    "opik==2.2.100",
+    "python-dotenv>=1.2.3",
+]
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
