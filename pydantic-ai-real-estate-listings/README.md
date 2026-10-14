@@ -29,14 +29,17 @@ then an `llm` span `chat gpt-4o-mini` with token counts and an estimated cost. A
 `metrics_calculation` branch holds the judge's `llm_judge` call.
 
 Under **Test Suites**, open `pydantic-ai-real-estate-listings` and its experiment
-`listings-gpt-4o-mini`: 2 of 6 notes pass (33%). Failures from the recorded run:
-
-- The text from Mei says "3-something hundred k?" and the agent returned `price_usd: 300000`.
-- The Saltmarsh note says "new roof 2021" and the agent set `year_built: 2021`.
-- The voicemail's phone number came back as the words "five five five, oh one six two".
-- "DM Priya" produced `agent_name: null` on the Harlow note.
-
-Each failing assertion carries the judge's one-sentence reason.
+`listings-gpt-4o-mini`: the final run passes 6 of 6 notes (100%), and every item row lists
+each assertion with the judge's reason. It was not always green. The first version of the
+system prompt ("never guess or invent values", nothing more) scored 2 of 6 (33%): Mei's
+"3-something hundred k?" became `price_usd: 300000`, "new roof 2021" became
+`year_built: 2021`, a voicemail phone number came back as the words "five five five, oh one
+six two", and "DM Priya" gave `agent_name: null`. Four added sentences to the prompt (vague
+price is null, year built is never a roof date, phones as digits, names as written) fixed
+those. Over-correcting showed up too: an intermediate prompt that said "a first name is the
+agent name" truncated "Renata Okafor" to "Renata". The suite caught each regression, and
+the Harlow note still flips between pass and fail across runs, which is why each note runs
+three times and needs two passes.
 
 ## Run it yourself
 
@@ -44,7 +47,7 @@ Each failing assertion carries the judge's one-sentence reason.
 2. `cp .env.example .env` and add `OPENAI_API_KEY`.
 3. `uv sync`
 4. `uv run listings extract 2` for one note, then `uv run listings suite` for the suite
-   (about a minute, a cent or so).
+   (under a minute, about a cent).
 
 ## Poke around
 
@@ -56,8 +59,17 @@ Each failing assertion carries the judge's one-sentence reason.
 
 **`UserError: Set the OPENAI_API_KEY environment variable` when running `pytest`.**
 Pydantic AI builds the model client when the `Agent` is created, so importing the module
-fails without a key. Pass `defer_model_check=True` to `Agent(...)` so the key is only
-needed on the first real call; tests then use `agent.override(model=TestModel())`.
+fails without a key. Pass `defer_model_check=True` to `Agent(...)`; the key is then only
+needed on the first real call, and tests use `agent.override(model=TestModel())`.
+
+**The suite reports 7 items after you reworded one assertion.** Items are deduplicated by
+content, so an edited item is inserted as a new one and the old version stays. Delete the
+suite dataset and re-run: `opik.Opik().delete_dataset("pydantic-ai-real-estate-listings")`.
+
+**A correct output fails an assertion that says "X is null because ...".** The judge also
+checks the stated reason against the output, and an output cannot carry a reason. Write
+the expectation only: "The year built is null, since 2021 is only the roof date" passes
+a null `year_built`; "null because 2021 is the roof date, not the build year" did not.
 
 ## How it's put together
 

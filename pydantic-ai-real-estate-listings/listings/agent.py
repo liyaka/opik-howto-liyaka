@@ -15,7 +15,11 @@ agent = Agent(
     system_prompt=(
         "You turn messy real-estate agent notes, voicemail transcripts and texts "
         "into a property listing record. Fill in only what the note says. If a "
-        "field is not stated, leave it null; never guess or invent values."
+        "field is not stated, leave it null; never guess or invent values. "
+        "A vague or approximate price is null. year_built is only a stated "
+        "construction year, never a renovation or roof date. Keep names as "
+        "written, full name when given. Write phone numbers as digits with "
+        "dashes, like 555-0162, converting spoken digits."
     ),
 )
 

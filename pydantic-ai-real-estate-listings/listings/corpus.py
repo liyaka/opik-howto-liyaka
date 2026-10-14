@@ -51,7 +51,7 @@ ITEMS = [
         ),
         "assertions": [
             "The price is 1200000 and bedrooms is 4 and bathrooms is 3",
-            "The year built is null because 2021 is the roof date, not the build year",
+            "The year built is null, since 2021 is only the roof date",
             "The agent email is dolores.v@tidewater-realty.example, decoded from the '(at)' obfuscation",
         ],
     },
@@ -59,7 +59,7 @@ ITEMS = [
         "note": "open house sun 2-4 at 27 Wren Hollow!! cute starter, 2bd 1ba ~900 sq ft. lmk -Theo 503 555 0144",
         "assertions": [
             "The address is 27 Wren Hollow, bedrooms is 2 and bathrooms is 1",
-            "The agent is Theo and the phone is 503 555 0144",
+            "The agent is Theo and the phone digits are 5035550144, with any separators",
             "The price is null because no price is stated",
             "The agent email is null because the note contains none",
         ],
