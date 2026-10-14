@@ -2,6 +2,7 @@
 
 from functools import lru_cache
 
+import opik
 from langchain_openai import ChatOpenAI
 
 from . import MODEL
@@ -16,6 +17,9 @@ def get_llm() -> ChatOpenAI:
     return ChatOpenAI(model=MODEL, temperature=0)
 
 
+# type="tool" makes retrieval its own tool span under the researcher node, with the query
+# and the returned sections; OpikTracer alone can drop retriever runs, so this is explicit.
+@opik.track(name="retrieve_notes", type="tool")
 def retrieve(query: str) -> list[dict]:
     """Look up the best-matching field-note sections for a question."""
     return search(query, CORPUS)
