@@ -1,0 +1,19 @@
+[project]
+name = "ollama-beekeeping-rag"
+version = "0.1.0"
+description = "Fully local RAG over a fictional beekeeping handbook with Ollama and LangChain, traced with Opik - no cloud LLM, no provider key"
+requires-python = ">=3.12"
+dependencies = [
+    "langchain-core>=1.0",
+    "langchain-ollama>=1.0",
+    "numpy>=2.0",
+    "opik>=2.2",
+    "python-dotenv>=1.0",
+]
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
