@@ -1,0 +1,146 @@
+[
+  {
+    "song": "A hushed, wistful piece for string quartet and solo piano, slow and unhurried at about 54 beats per minute, with long-breathed melodies that feel like a candlelit salon in the early 1800s.",
+    "genre": "classical"
+  },
+  {
+    "song": "A smoky late-night trio: upright bass walking a steady line, brushed drums and a muted trumpet improvising lazy, bluesy phrases at a relaxed 90 BPM; feels like a 1950s basement club.",
+    "genre": "jazz"
+  },
+  {
+    "song": "A single acoustic guitar and a cracked, honest voice tell a quiet story about a wandering farmhand; fingerpicked, slow and intimate, as if recorded in a kitchen.",
+    "genre": "folk"
+  },
+  {
+    "song": "Down-tuned, chugging guitars and double-kick drums hammer at 200 BPM beneath guttural, snarled vocals; relentless, dark and crushing, with no melody to speak of.",
+    "genre": "metal"
+  },
+  {
+    "song": "A pulsing four-on-the-floor kick at 128 BPM with a hypnotic, rolling bassline and slowly filtering synth stabs; steady, dark and made for a warehouse dance floor after midnight.",
+    "genre": "electronic"
+  },
+  {
+    "song": "A dusty drum break and a looped soul sample under a laid-back, rhythmic spoken delivery about growing up in the city; head-nodding, around 90 BPM, with a 1990s boom-bap feel.",
+    "genre": "hip-hop"
+  },
+  {
+    "song": "Thunderous timpani and a full brass section open a stately, triumphant movement at a march-like tempo; the whole orchestra swells like a coronation, with a late-Romantic grandeur.",
+    "genre": "classical"
+  },
+  {
+    "song": "Fast, breathless saxophone runs over a frantic swinging rhythm section, tempo around 280 BPM, with complicated chord changes and a feverish, virtuosic energy straight out of the bebop era.",
+    "genre": "jazz"
+  },
+  {
+    "song": "Fiddle, mandolin and a stomping foot keep a cheerful, lively beat at around 130 BPM; a communal sing-along about harvest time with a rustic, countryside feel.",
+    "genre": "folk"
+  },
+  {
+    "song": "Soaring twin-guitar harmonies, a galloping bass and a wailing high-pitched singer tell an epic tale of dragons and knights; fast, heroic and theatrical, 1980s arena style.",
+    "genre": "metal"
+  },
+  {
+    "song": "Dreamy, floating synth pads and a gentle arpeggio drift over soft, glitchy percussion; calm, spacious and slightly melancholic, with no vocals and a late-night headphone feel.",
+    "genre": "electronic"
+  },
+  {
+    "song": "Booming 808 bass, skittering hi-hats and a minimal dark melody back a confident, melodic, auto-tuned vocal; slow and sparse, with a modern trap sound.",
+    "genre": "hip-hop"
+  },
+  {
+    "song": "A solitary harpsichord ripples through quick, interlocking counterpoint, bright and orderly, as if written for a Baroque court; no vocals, no drums, tempo brisk but precise.",
+    "genre": "classical"
+  },
+  {
+    "song": "A mellow, romantic ballad with a velvety vocalist, soft piano comping and sparse bass; lush extended chords and a slow sway, reminiscent of a vintage cocktail lounge.",
+    "genre": "jazz"
+  },
+  {
+    "song": "A gentle waltz with an accordion and a softly strummed ukulele, bittersweet and nostalgic, with harmonies from a small group of friends around a campfire.",
+    "genre": "folk"
+  },
+  {
+    "song": "A slow, monstrously heavy dirge: fuzzed-out bass, drums like falling boulders and a drawn-out, grim drone; heavy as a landslide and deliberately oppressive.",
+    "genre": "metal"
+  },
+  {
+    "song": "Aggressive, distorted wobble bass and a huge drop after a rising snare build; frantic, high-energy and festival-ready, tempo around 150 BPM.",
+    "genre": "electronic"
+  },
+  {
+    "song": "A rapid-fire, tongue-twisting vocalist spits intricate rhymes over a clean beat and a jazzy piano loop; clever, wordy and technical, with a conscious, lyrical focus.",
+    "genre": "hip-hop"
+  },
+  {
+    "song": "Wordless choir and a drifting cello carry a mournful, reverent mood at a very slow pace, with a church-like acoustic and an old-world, candle-and-incense atmosphere.",
+    "genre": "classical"
+  },
+  {
+    "song": "Electric piano, fretless bass and a wandering synth lead groove through odd-meter vamps; busy, cerebral and warm, with a 1970s fusion feel and long solos.",
+    "genre": "jazz"
+  },
+  {
+    "song": "Banjo and harmonica carry a dusty, melancholy tune about hard times and long roads, sparse and weathered, with a Depression-era troubadour tradition.",
+    "genre": "folk"
+  },
+  {
+    "song": "Blistering tremolo-picked guitars, blast-beat drums and a shrieked, raw vocal over a lo-fi, icy recording; bleak, cold and frantic, evoking a frozen forest.",
+    "genre": "metal"
+  },
+  {
+    "song": "Retro analog synths, a gated drum machine and a robotic vocoder voice; glossy, neon and nostalgic, in a 1980s sci-fi style but entirely produced on machines.",
+    "genre": "electronic"
+  },
+  {
+    "song": "A bouncy, party-ready beat with handclaps, a funky bassline and a chant-along hook, with shouted call-and-response vocals; playful, brash, club-friendly and relentlessly upbeat.",
+    "genre": "hip-hop"
+  },
+  {
+    "song": "A playful woodwind scherzo, flutes and clarinets trading fast staccato runs over pizzicato strings, light and mischievous, with a classical-era elegance.",
+    "genre": "classical"
+  },
+  {
+    "song": "A cheerful ensemble with clarinet, trombone and banjo trading lively improvised lines over a bouncy two-beat rhythm, an early-1920s dance-hall spirit.",
+    "genre": "jazz"
+  },
+  {
+    "song": "Layered acoustic guitars, a soft hand drum and airy, close vocal harmonies; warm, earnest and wistful, an indie-leaning singer-songwriter style set on a porch at dusk.",
+    "genre": "folk"
+  },
+  {
+    "song": "A heavy, riff-driven anthem with crunching distorted guitars, shouted gang vocals and a pounding mid-tempo breakdown; aggressive, modern, built for a mosh pit.",
+    "genre": "metal"
+  },
+  {
+    "song": "A skittering, broken-beat rhythm with chopped samples, deep sub-bass and eerie ambience, shifting unpredictably; moody, nocturnal and cerebral, made for a city at 4 a.m.",
+    "genre": "electronic"
+  },
+  {
+    "song": "A cinematic beat of sweeping orchestral strings and a heavy, deliberate drum pattern carries a stern, rhythmically spoken storytelling verse about ambition and loss; serious and grand.",
+    "genre": "hip-hop"
+  },
+  {
+    "song": "A string quartet reads from a printed score in a concert hall, playing a slow, bluesy melody with a few swung notes and jazz-tinged chords; formal, restrained and entirely written out, with no improvisation.",
+    "genre": "classical"
+  },
+  {
+    "song": "A quintet locks into a groovy, repeating electric-piano riff under a wah-wah saxophone solo, with heavy funk-style drums; loose, improvised, with long jam sections in the style of a 1970s club band.",
+    "genre": "jazz"
+  },
+  {
+    "song": "An acoustic singer-songwriter strums a gentle ballad while a soft drum machine and a faint synth pad hum underneath; intimate, confessional lyrics about home, captured in a lo-fi bedroom recording.",
+    "genre": "folk"
+  },
+  {
+    "song": "A slow, mournful piano and a lone cello open the piece before huge, down-tuned guitars and a growled vocal crash in; dark, heavy and funereal, at a tempo around 60 BPM.",
+    "genre": "metal"
+  },
+  {
+    "song": "A warm, jazzy chord loop on a Rhodes piano plays over a steady programmed kick and a dubby sub-bass; no vocals, hypnotic, with filter sweeps building slowly over eight minutes.",
+    "genre": "electronic"
+  },
+  {
+    "song": "A raspy, half-sung vocal in a flat, rhythmic flow rides a sparse, melancholic guitar loop and heavy 808 drums; moody and late-night, with a modern emo-rap feel.",
+    "genre": "hip-hop"
+  }
+]
