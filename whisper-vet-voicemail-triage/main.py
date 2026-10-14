@@ -6,6 +6,7 @@ small model into an urgency level plus a callback entry.
 
 import functools
 import json
+import os
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -14,8 +15,14 @@ EXAMPLE_DIR = Path(__file__).resolve().parent
 OUTPUT_DIR = EXAMPLE_DIR / "output"
 
 load_dotenv(EXAMPLE_DIR.parent / ".env")
+# Pin the Opik project before opik is imported: every trace of this app
+# lands in the "whisper-vet-voicemail-triage" project instead of "Default".
+os.environ.setdefault("OPIK_PROJECT_NAME", "whisper-vet-voicemail-triage")
 
+import opik
 from openai import OpenAI
+from opik import Attachment, opik_context
+from opik.integrations.openai import track_openai
 
 from voicemails import VOICEMAILS
 
@@ -52,9 +59,15 @@ Judge the pet's condition, not the caller's tone.
 
 @functools.cache
 def get_client() -> OpenAI:
-    return OpenAI()
+    # track_openai wraps the client: every TTS, transcription and chat call
+    # becomes a child span (llm spans carry token usage and cost) under
+    # whichever @opik.track function is running.
+    return track_openai(OpenAI())
 
 
+# @opik.track opens a span named "synthesize-voicemail" under the current
+# trace, with the arguments as input and the returned byte size as output.
+@opik.track(name="synthesize-voicemail")
 def synthesize_voicemail(voicemail: dict, audio_path: Path) -> int:
     """Speak the script with TTS and save it as MP3. Returns the byte size."""
     response = get_client().audio.speech.create(
@@ -67,6 +80,9 @@ def synthesize_voicemail(voicemail: dict, audio_path: Path) -> int:
     return len(response.content)
 
 
+# The span's output is the transcript, so a mis-heard name shows up right
+# next to the audio attached to the parent trace.
+@opik.track(name="transcribe")
 def transcribe(audio_path: Path) -> str:
     """Speech-to-text. Returns the plain transcript."""
     with audio_path.open("rb") as audio_file:
@@ -87,6 +103,9 @@ def parse_triage(raw: str) -> dict:
     return data
 
 
+# Wraps the chat call so the triage span holds the transcript in and the
+# parsed urgency/callback entry out; the llm span nests inside it.
+@opik.track(name="triage")
 def triage(transcript: str) -> dict:
     """Transcript -> urgency level and callback entry."""
     response = get_client().chat.completions.create(
@@ -105,12 +124,22 @@ def callback_list(results: list[dict]) -> list[dict]:
     return sorted(results, key=lambda r: URGENCY_ORDER.index(r["urgency"]))
 
 
+# Top-level function: one call = one trace per voicemail, with the whole
+# pipeline as its span tree.
+@opik.track(name="triage-voicemail")
 def process_voicemail(voicemail: dict) -> dict:
     """One voicemail end to end: audio -> transcript -> triage."""
     audio_path = OUTPUT_DIR / f"{voicemail['id']}.mp3"
     synthesize_voicemail(voicemail, audio_path)
     transcript = transcribe(audio_path)
     result = triage(transcript)
+    # Attach the MP3 the pipeline heard: Opik uploads it and shows a player on
+    # the trace. The urgency tag makes traces filterable by outcome.
+    opik_context.update_current_trace(
+        attachments=[Attachment(data=str(audio_path), content_type="audio/mpeg")],
+        tags=[result["urgency"]],
+        metadata={"voicemail_id": voicemail["id"], "caller": voicemail["caller"]},
+    )
     record = {"id": voicemail["id"], "transcript": transcript, **result}
     (OUTPUT_DIR / f"{voicemail['id']}.json").write_text(json.dumps(record, indent=2))
     return record
@@ -127,3 +156,8 @@ if __name__ == "__main__":
     print("\nCallback list (most urgent first)")
     for r in callback_list(results):
         print(f"  {r['urgency']:<9} {r['owner']} / {r['pet']} / {r['number']} / {r['reason']}")
+
+    # Traces and attachments are sent from a background thread; flush so the
+    # process doesn't exit before they reach Opik.
+    opik.flush_tracker()
+    print("\nDone. Open the whisper-vet-voicemail-triage project in Opik.")
