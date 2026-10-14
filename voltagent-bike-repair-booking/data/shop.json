@@ -1,0 +1,22 @@
+{
+  "shop": "Spokewise Cycle Works",
+  "services": [
+    { "id": "SVC-TUNE", "name": "Basic tune-up", "description": "Brake and gear adjustment, tyre pressure, chain lube, bolt check.", "price_usd": 65, "duration_hours": 1 },
+    { "id": "SVC-FLAT", "name": "Flat tyre fix", "description": "Remove wheel, patch or replace the tube, refit and inflate.", "price_usd": 18, "duration_hours": 0.5 },
+    { "id": "SVC-BRAKE", "name": "Brake bleed and pad swap", "description": "Hydraulic disc brake bleed plus new pads front and rear.", "price_usd": 95, "duration_hours": 1.5 },
+    { "id": "SVC-DRIVE", "name": "Drivetrain overhaul", "description": "New chain and cassette, deep clean, indexing from scratch.", "price_usd": 140, "duration_hours": 2 },
+    { "id": "SVC-WHEEL", "name": "Wheel true", "description": "Spoke tension and lateral true for one wheel.", "price_usd": 30, "duration_hours": 0.5 }
+  ],
+  "slots": [
+    { "id": "SLOT-1", "date": "2026-03-09", "time": "09:00", "mechanic": "Odile", "open": false },
+    { "id": "SLOT-2", "date": "2026-03-09", "time": "13:00", "mechanic": "Odile", "open": false },
+    { "id": "SLOT-3", "date": "2026-03-10", "time": "10:00", "mechanic": "Bram", "open": true },
+    { "id": "SLOT-4", "date": "2026-03-10", "time": "14:30", "mechanic": "Odile", "open": true },
+    { "id": "SLOT-5", "date": "2026-03-11", "time": "09:30", "mechanic": "Bram", "open": true },
+    { "id": "SLOT-6", "date": "2026-03-12", "time": "11:00", "mechanic": "Bram", "open": true }
+  ],
+  "bookings": [
+    { "id": "BK-2201", "customer": "Tomas Reyes", "bike": "red gravel bike", "service_id": "SVC-BRAKE", "slot_id": "SLOT-1", "status": "in_progress", "note": "Bleed finished, waiting on the rear pad delivery." },
+    { "id": "BK-2202", "customer": "Ines Okafor", "bike": "blue commuter", "service_id": "SVC-TUNE", "slot_id": "SLOT-2", "status": "ready_for_pickup", "note": "Ready at the front desk until 6pm." }
+  ]
+}
