@@ -1,0 +1,31 @@
+[
+  {
+    "account_id": "ACC-3001",
+    "holder": "Marisol Quenby",
+    "type": "checking",
+    "currency": "USD",
+    "balance": 2481.37,
+    "cards": [
+      { "card_id": "CRD-7788", "last4": "4412", "network": "Visa debit", "status": "active" }
+    ]
+  },
+  {
+    "account_id": "ACC-3002",
+    "holder": "Marisol Quenby",
+    "type": "savings",
+    "currency": "USD",
+    "balance": 15320.0,
+    "cards": []
+  },
+  {
+    "account_id": "ACC-4410",
+    "holder": "Desmond Okafor-Reyes",
+    "type": "checking",
+    "currency": "USD",
+    "balance": 312.9,
+    "cards": [
+      { "card_id": "CRD-9021", "last4": "0937", "network": "Visa debit", "status": "active" },
+      { "card_id": "CRD-9022", "last4": "6650", "network": "Visa credit", "status": "active" }
+    ]
+  }
+]

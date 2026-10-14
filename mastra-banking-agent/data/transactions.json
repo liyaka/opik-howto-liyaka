@@ -1,0 +1,11 @@
+[
+  { "txn_id": "T-9001", "account_id": "ACC-3001", "date": "2026-10-12", "merchant": "Harbor Street Grocers", "amount": -64.18, "category": "groceries" },
+  { "txn_id": "T-9002", "account_id": "ACC-3001", "date": "2026-10-11", "merchant": "Lumen Power & Light", "amount": -112.4, "category": "utilities" },
+  { "txn_id": "T-9003", "account_id": "ACC-3001", "date": "2026-10-10", "merchant": "Payroll - Tidewater Labs", "amount": 2150.0, "category": "income" },
+  { "txn_id": "T-9004", "account_id": "ACC-3001", "date": "2026-10-09", "merchant": "NIMBUS*STREAMING 8841", "amount": -14.99, "category": "subscriptions" },
+  { "txn_id": "T-9005", "account_id": "ACC-3001", "date": "2026-10-08", "merchant": "Kestrel Coffee Roasters", "amount": -7.25, "category": "dining" },
+  { "txn_id": "T-9101", "account_id": "ACC-4410", "date": "2026-10-13", "merchant": "GLOBEX ELECTRONICS ONLINE", "amount": -899.0, "category": "shopping" },
+  { "txn_id": "T-9102", "account_id": "ACC-4410", "date": "2026-10-13", "merchant": "GLOBEX ELECTRONICS ONLINE", "amount": -899.0, "category": "shopping" },
+  { "txn_id": "T-9103", "account_id": "ACC-4410", "date": "2026-10-12", "merchant": "Harbor Street Grocers", "amount": -41.6, "category": "groceries" },
+  { "txn_id": "T-9104", "account_id": "ACC-4410", "date": "2026-10-09", "merchant": "Payroll - Corvid Freight", "amount": 1320.0, "category": "income" }
+]
