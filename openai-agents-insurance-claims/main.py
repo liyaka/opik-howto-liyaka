@@ -1,6 +1,7 @@
 """Run scripted multi-turn claim conversations through the claims desk."""
 
 import os
+import uuid
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -11,7 +12,7 @@ load_dotenv()
 os.environ.setdefault("OPIK_PROJECT_NAME", "openai-agents-insurance-claims")
 
 import opik
-from agents import Runner, set_trace_processors
+from agents import Runner, set_trace_processors, trace
 from opik.integrations.openai.agents import OpikTracingProcessor
 
 from desk import triage_agent
@@ -40,9 +41,15 @@ def run_demo() -> None:
     for name, turns in CONVERSATIONS.items():
         print(f"\n=== {name} ===")
         history: list = []
+        thread_id = f"{name}-{uuid.uuid4().hex[:6]}"
         for message in turns:
             print(f"\nUser:  {message}")
-            result = Runner.run_sync(triage_agent, history + [{"role": "user", "content": message}])
+            # One trace per turn. The shared group_id becomes the Opik thread id, so the Threads
+            # tab shows each claim conversation as one thread; without it every turn is orphaned.
+            with trace(workflow_name="Claims intake", group_id=thread_id):
+                result = Runner.run_sync(
+                    triage_agent, history + [{"role": "user", "content": message}]
+                )
             print(f"Agent ({result.last_agent.name}): {result.final_output}")
             history = result.to_input_list()
 
