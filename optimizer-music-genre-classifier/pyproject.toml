@@ -1,10 +1,11 @@
 [project]
 name = "optimizer-music-genre-classifier"
 version = "0.1.0"
-description = "A song-genre classifier prompt that is scored against labelled fictional songs"
+description = "A song-genre classifier prompt that an optimizer rewrites, with the score of every trial and the winning prompt kept in Opik"
 requires-python = ">=3.12"
 dependencies = [
     "openai>=1.60.0",
+    "opik>=2.2.100",
     "python-dotenv>=1.0.1",
 ]
 

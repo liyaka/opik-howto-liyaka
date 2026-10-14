@@ -2,6 +2,8 @@
 
 import argparse
 
+import opik
+
 from genreclf import classify, dataset, prompts
 
 
@@ -19,4 +21,8 @@ def main(argv: list[str] | None = None) -> None:
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("baseline", help="score the hand-written prompt").set_defaults(func=cmd_baseline)
     args = parser.parse_args(argv)
-    args.func(args)
+    try:
+        args.func(args)
+    finally:
+        # Traces are sent from a background thread; flush so none are lost on exit.
+        opik.flush_tracker()
