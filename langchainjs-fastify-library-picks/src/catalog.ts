@@ -60,12 +60,7 @@ export function searchCatalog(query: string, catalog: Book[], limit = 4): Book[]
     .map((s) => s.book);
 }
 
-export function formatCandidates(books: Book[]): string {
-  if (books.length === 0) return "(no catalog matches for this request)";
-  return books
-    .map(
-      (b) =>
-        `- ${b.title} by ${b.author} (${b.genre}, ${b.pages} pages): ${b.blurb}`,
-    )
-    .join("\n");
+export function formatCandidates(docs: { pageContent: string }[]): string {
+  if (docs.length === 0) return "(no catalog matches for this request)";
+  return docs.map((d) => `- ${d.pageContent}`).join("\n");
 }

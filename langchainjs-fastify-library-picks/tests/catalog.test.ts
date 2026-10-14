@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatCandidates, loadCatalog, searchCatalog, tokenize } from "../src/catalog.js";
+import { CatalogRetriever } from "../src/chain.js";import { formatCandidates, loadCatalog, searchCatalog, tokenize } from "../src/catalog.js";
 
 const catalog = loadCatalog();
 
@@ -26,7 +26,18 @@ describe("catalog search", () => {
   });
 
   it("lists page counts so the model can answer 'anything shorter?'", () => {
-    const text = formatCandidates(searchCatalog("short dragons", catalog));
+    const docs = searchCatalog("short dragons", catalog).map((b) => ({
+      pageContent: `${b.title} (${b.pages} pages)`,
+    }));
+    const text = formatCandidates(docs);
     expect(text).toMatch(/128 pages/);
+  });
+});
+
+describe("CatalogRetriever", () => {
+  it("returns documents with page counts in the metadata", async () => {
+    const docs = await new CatalogRetriever(catalog).invoke("cozy mystery coast");
+    expect(docs[0].pageContent).toContain("Salt Road Almanac");
+    expect(docs[0].metadata.pages).toBe(212);
   });
 });

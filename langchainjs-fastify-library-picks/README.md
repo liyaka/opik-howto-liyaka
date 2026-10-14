@@ -10,7 +10,7 @@ A reader opens the chat on the Elmwood Public Library site and types "a cozy mys
 
 ## What you'll build
 
-A Fastify server with a single `POST /chat` route in front of a LangChain.js chain. The chain takes the reader's message as a **string** and returns the recommendation as a **string**. Inside, it loads that reader's history, searches a fictional 15-book catalog in `data/catalog.json` using the reader's earlier messages too (so "anything shorter?" still knows you wanted a cozy sea mystery), builds the prompt, calls `gpt-4o-mini`, and parses the reply.
+A Fastify server with a single `POST /chat` route in front of a LangChain.js chain. The chain takes the reader's message as a **string** and returns the recommendation as a **string**. Inside, it loads that reader's history, searches (through a LangChain retriever) a fictional 15-book catalog in `data/catalog.json` using the reader's earlier messages too (so "anything shorter?" still knows you wanted a cozy sea mystery), builds the prompt, calls `gpt-4o-mini`, and parses the reply.
 
 Tracing is one `OpikCallbackHandler` per reader, created with `threadId` set to the reader's session id. `npm run demo` starts the server, sends three scripted readers three turns each, flushes, and exits.
 
@@ -20,7 +20,7 @@ Open the `langchainjs-fastify-library-picks` project. It holds 9 traces, all nam
 
 **Threads tab.** Three threads: `reader-cozy-mystery`, `reader-space-optimist` and `reader-book-club`, each with 3 turns. The first message of each reads like a sentence ("I want a cozy mystery set somewhere near the sea."), and the last is the bot's reply, because the root run takes and returns plain strings. Open a thread to read the whole conversation top to bottom.
 
-**Traces tab.** Open any trace. The tree is `library-picks-turn` with five children: `load-session-history`, `search-catalog`, `ChatPromptTemplate`, `ChatOpenAI` and `StrOutputParser`. Only `ChatOpenAI` is an `llm` span: model `gpt-4o-mini`, about 400-700 prompt tokens, and a non-null estimated cost of roughly $0.00007 per turn. The whole demo (9 turns) costs about $0.0007. Open `ChatPromptTemplate` on a follow-up turn to see the catalog matches and earlier messages that went to the model.
+**Traces tab.** Open any trace. The tree is `library-picks-turn` with five children: `load-session-history`, `pick-candidates` (with `search-catalog` nested inside it), `ChatPromptTemplate`, `ChatOpenAI` and `StrOutputParser`. `ChatOpenAI` is the one `llm` span: model `gpt-4o-mini`, between 231 and 407 prompt tokens in the demo run, and a non-null estimated cost of $0.000065 to $0.000089 per turn (the 9 turns total $0.00069). `search-catalog` is a `tool` span whose output lists the matched books as documents with their page counts. Open `ChatPromptTemplate` on a follow-up turn to see those matches and the earlier messages that went to the model.
 
 ## Run it yourself
 
@@ -49,15 +49,17 @@ Tests: `npm test` (offline; they set `OPIK_TRACK_DISABLE=true`, Opik's switch th
 
 **`require() of ES Module .../cookie/dist/index.js from .../light-my-request/lib/cookies.js not supported` in tests.** Fastify's `app.inject()` loads a dependency that Node 20.16 cannot `require()`. The tests here start the app with `listen({ port: 0 })` and call it with `fetch` instead.
 
+**The catalog lookup shows up as an anonymous `general` span with a bare string output.** That is what a plain `RunnableLambda` becomes in the trace. Make the lookup a `BaseRetriever` subclass and call it with the parent step's `config` (`retriever.invoke(query, config)`): `opik-langchain` then records a `tool` span named `search-catalog` with the retrieved documents as output, nested under the turn. We checked on the pinned versions that retriever runs are recorded, not dropped.
+
 ## How it's put together
 
 - `src/server.ts`: Fastify app, per-reader session with its own `OpikCallbackHandler`, shared Opik client and flush.
-- `src/chain.ts`: the string-in, string-out chain: load history, search catalog, prompt, model, parser.
+- `src/chain.ts`: the string-in, string-out chain, plus the `CatalogRetriever` that becomes the `tool` span.
 - `src/catalog.ts`: catalog loading and keyword search.
 - `src/demo.ts`: starts the server, plays three readers, flushes, exits.
 - `src/verify.ts`: queries Opik and prints PASS/FAIL checks.
 - `data/catalog.json`: the fictional catalog.
-- `tests/`: catalog search and the chat route with a fake model and tracking disabled.
+- `tests/`: catalog search, the retriever, and the chat route with a fake model and tracking disabled.
 
 ---
 

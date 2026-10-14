@@ -47,7 +47,11 @@ check(
   llm.length > 0 && llm.every((s) => s.total_estimated_cost > 0),
   `total $${llm.reduce((a, s) => a + (s.total_estimated_cost ?? 0), 0).toFixed(6)}`,
 );
-check("catalog lookups traced", retrieval.length === traces.length, `${retrieval.length} search-catalog spans (type ${[...new Set(retrieval.map((s) => s.type))].join(", ")})`);
+check(
+  "catalog lookups are tool spans with documents",
+  retrieval.length === traces.length && retrieval.every((s) => s.type === "tool" && Array.isArray(s.output?.documents)),
+  `${retrieval.length} search-catalog spans (type ${[...new Set(retrieval.map((s) => s.type))].join(", ")})`,
+);
 
 console.log(`\nspan names: ${[...new Set(spans.map((s) => `${s.name}:${s.type}`))].join(", ")}`);
 process.exit(failures ? 1 : 0);
