@@ -1,0 +1,30 @@
+[
+  {
+    "id": "cafe-ordering",
+    "title": "Ordering at a cafe in Valparaiso",
+    "level": "A2",
+    "goal": "Order food and drinks politely and ask for the bill.",
+    "vocab": [
+      { "es": "un cortado", "en": "an espresso with a splash of milk" },
+      { "es": "la cuenta", "en": "the bill" },
+      { "es": "para llevar", "en": "to take away" },
+      { "es": "quisiera", "en": "I would like" },
+      { "es": "sin azucar", "en": "without sugar" }
+    ],
+    "grammarFocus": "Polite requests with quisiera and me gustaria; ser vs estar is out of scope today."
+  },
+  {
+    "id": "weekend-plans",
+    "title": "Talking about weekend plans",
+    "level": "A2",
+    "goal": "Describe what you did and what you will do using the preterite and ir + a + infinitive.",
+    "vocab": [
+      { "es": "el fin de semana", "en": "the weekend" },
+      { "es": "fui", "en": "I went" },
+      { "es": "voy a visitar", "en": "I am going to visit" },
+      { "es": "la playa", "en": "the beach" },
+      { "es": "con mis primos", "en": "with my cousins" }
+    ],
+    "grammarFocus": "Preterite of ir (fui, fuiste, fue) and the near future with ir a + infinitive."
+  }
+]

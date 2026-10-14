@@ -1,0 +1,46 @@
+{
+  "name": "vercel-ai-language-tutor",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Streaming Spanish tutor on the Vercel AI SDK, traced with opik-vercel and scored by a live Opik online-evaluation rule",
+  "scripts": {
+    "dev": "next dev -p 3181",
+    "demo": "tsx scripts/demo.ts",
+    "rule": "tsx scripts/ensure-rule.ts",
+    "verify": "tsx scripts/verify.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "OPIK_TRACK_DISABLE=true vitest run"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "^4.0.83",
+    "@ai-sdk/otel": "^1.0.127",
+    "@ai-sdk/react": "^4.0.130",
+    "@vercel/otel": "^2.1.3",
+    "ai": "^7.0.127",
+    "dotenv": "^16.5.0",
+    "next": "^16.3.8",
+    "opik": "2.2.100",
+    "opik-vercel": "2.2.100",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@opentelemetry/api-logs": "^0.222.0",
+    "@opentelemetry/instrumentation": "^0.222.0",
+    "@opentelemetry/sdk-logs": "^0.222.0",
+    "@types/node": "^20.14.0",
+    "@types/react": "^19.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  },
+  "overrides": {
+    "opik-vercel": {
+      "opik": "$opik"
+    }
+  }
+}
