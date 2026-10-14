@@ -5,5 +5,13 @@ description = "A DSPy fact-checker for astronomy claims, tested before and after
 requires-python = ">=3.12"
 dependencies = [
     "dspy>=3.0",
+    "opik>=2.2.100",
     "python-dotenv>=1.0",
 ]
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
