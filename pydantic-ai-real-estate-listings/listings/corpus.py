@@ -73,3 +73,8 @@ ITEMS = [
         ],
     },
 ]
+
+
+def resolve_note(arg: str) -> str:
+    """A digit selects a bundled note (1-based); anything else is the note text itself."""
+    return ITEMS[int(arg) - 1]["note"] if arg.isdigit() else arg

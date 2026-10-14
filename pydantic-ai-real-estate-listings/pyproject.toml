@@ -7,7 +7,7 @@ requires-python = ">=3.12"
 dependencies = [
     "pydantic-ai-slim[openai]>=1.0",
     "logfire>=4.0",
-    "opik>=2.2.31",
+    "opik>=2.2.100",
     "python-dotenv>=1.0",
 ]
 

@@ -11,6 +11,7 @@ MODEL = "openai:gpt-4o-mini"
 agent = Agent(
     MODEL,
     output_type=PropertyListing,
+    defer_model_check=True,
     system_prompt=(
         "You turn messy real-estate agent notes, voicemail transcripts and texts "
         "into a property listing record. Fill in only what the note says. If a "

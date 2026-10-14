@@ -21,7 +21,7 @@ def setup_tracing() -> None:
 
     # OpikSpanProcessor attaches the agent's spans to the surrounding @opik.track trace,
     # so each extraction is ONE trace instead of a trace plus a detached OTel one.
-    logfire.configure(send_to_logfire=False, additional_span_processors=[OpikSpanProcessor()])
+    logfire.configure(send_to_logfire=False, console=False, additional_span_processors=[OpikSpanProcessor()])
     # Emits invoke_agent / chat <model> spans (with token usage) for every Pydantic AI run.
     logfire.instrument_pydantic_ai()
 
