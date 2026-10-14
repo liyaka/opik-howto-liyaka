@@ -42,14 +42,18 @@ def run_demo() -> None:
         print(f"\n=== {name} ===")
         history: list = []
         thread_id = f"{name}-{uuid.uuid4().hex[:6]}"
+        # Follow-up turns must resume with the specialist the last turn ended on. Starting again at
+        # triage re-routes (or answers) without the tools: the trace shows no handoff and no tool spans.
+        agent = triage_agent
         for message in turns:
             print(f"\nUser:  {message}")
             # One trace per turn. The shared group_id becomes the Opik thread id, so the Threads
             # tab shows each claim conversation as one thread; without it every turn is orphaned.
             with trace(workflow_name="Claims intake", group_id=thread_id):
                 result = Runner.run_sync(
-                    triage_agent, history + [{"role": "user", "content": message}]
+                    agent, history + [{"role": "user", "content": message}]
                 )
+            agent = result.last_agent
             print(f"Agent ({result.last_agent.name}): {result.final_output}")
             history = result.to_input_list()
 

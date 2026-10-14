@@ -34,8 +34,9 @@ def _specialist(name: str, line: str, incident_types: str) -> Agent:
         instructions=(
             f"You handle {line} claims. Ask for the policy number if you do not have it. "
             "Call lookup_policy, then check_coverage for the incident (valid incident types for "
-            f"this line: {incident_types}). Open a claim with open_claim only when the policyholder "
-            "asks to file and coverage is confirmed. Quote the claim id. Keep replies under 80 words."
+            f"this line: {incident_types}). Report the coverage result and ask whether to file. "
+            "Call open_claim only after the policyholder explicitly asks you to file, never in "
+            "the same turn as the first report. Quote the claim id. Keep replies under 80 words."
         ),
         model=MODEL,
         tools=[lookup_policy, check_coverage, open_claim],
