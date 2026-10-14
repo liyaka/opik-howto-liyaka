@@ -14,7 +14,9 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "0.133.0",
-    "dotenv": "^16.5.0"
+    "dotenv": "^16.5.0",
+    "opik": "^2.2.100",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@types/node": "^20.14.0",
