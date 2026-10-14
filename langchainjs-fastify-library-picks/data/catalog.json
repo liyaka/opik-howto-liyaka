@@ -1,0 +1,226 @@
+[
+  {
+    "id": "bk-01",
+    "title": "Salt Road Almanac",
+    "author": "Ines Varga",
+    "genre": "mystery",
+    "pages": 212,
+    "tags": [
+      "coast",
+      "detective",
+      "cozy",
+      "weather"
+    ],
+    "blurb": "A tide-table clerk in a fishing town notices that every drowning matches an almanac entry nobody wrote."
+  },
+  {
+    "id": "bk-02",
+    "title": "The Lantern Clerk",
+    "author": "Odile Marsh",
+    "genre": "fantasy",
+    "pages": 388,
+    "tags": [
+      "city",
+      "magic",
+      "bureaucracy",
+      "humor"
+    ],
+    "blurb": "In a city that taxes light, a junior clerk discovers the ledger is quietly dimming the streets."
+  },
+  {
+    "id": "bk-03",
+    "title": "Small Hours at Birch Street",
+    "author": "Tomas Reyes",
+    "genre": "literary",
+    "pages": 164,
+    "tags": [
+      "family",
+      "neighbors",
+      "quiet",
+      "short"
+    ],
+    "blurb": "One night, six apartments, and the dropped casserole that finally gets the building talking."
+  },
+  {
+    "id": "bk-04",
+    "title": "Orbit of Apricots",
+    "author": "Mei-Lin Okafor",
+    "genre": "science fiction",
+    "pages": 301,
+    "tags": [
+      "space",
+      "food",
+      "found family",
+      "optimistic"
+    ],
+    "blurb": "A cargo hauler's cook keeps a failing crew together with a stubborn orchard in cargo bay three."
+  },
+  {
+    "id": "bk-05",
+    "title": "The Cartographer's Apprentice",
+    "author": "Willem Dahl",
+    "genre": "adventure",
+    "pages": 456,
+    "tags": [
+      "maps",
+      "journey",
+      "coming of age",
+      "epic"
+    ],
+    "blurb": "Fourteen-year-old Pell inherits a half-finished map of a continent that keeps rearranging itself."
+  },
+  {
+    "id": "bk-06",
+    "title": "Quiet Machines",
+    "author": "Hana Lindqvist",
+    "genre": "science fiction",
+    "pages": 243,
+    "tags": [
+      "robots",
+      "grief",
+      "gentle",
+      "near future"
+    ],
+    "blurb": "A retired repair technician adopts a maintenance robot that has started to hum lullabies."
+  },
+  {
+    "id": "bk-07",
+    "title": "A Recipe for Ordinary Days",
+    "author": "Priya Nandakumar",
+    "genre": "literary",
+    "pages": 198,
+    "tags": [
+      "food",
+      "memoir",
+      "family",
+      "comforting"
+    ],
+    "blurb": "A daughter cooks through her late mother's handwritten notebook and meets the woman behind the margins."
+  },
+  {
+    "id": "bk-08",
+    "title": "The Ninth Lighthouse",
+    "author": "Gareth Bloom",
+    "genre": "mystery",
+    "pages": 334,
+    "tags": [
+      "coast",
+      "detective",
+      "dark",
+      "atmospheric"
+    ],
+    "blurb": "An inspector rows out to a lighthouse that is not on any chart and finds the keeper's table still set."
+  },
+  {
+    "id": "bk-09",
+    "title": "Pocket Guide to Dragons, Revised",
+    "author": "Sunniva Aas",
+    "genre": "fantasy",
+    "pages": 128,
+    "tags": [
+      "dragons",
+      "humor",
+      "short",
+      "illustrated"
+    ],
+    "blurb": "A deadpan field manual by a retired dragon surveyor who is wrong about almost everything."
+  },
+  {
+    "id": "bk-10",
+    "title": "The Glass Orchard Heist",
+    "author": "Lucia Ferreira",
+    "genre": "thriller",
+    "pages": 287,
+    "tags": [
+      "heist",
+      "fast",
+      "ensemble",
+      "greenhouse"
+    ],
+    "blurb": "Five botanists plan to steal a single extinct apple tree from a guarded conservatory."
+  },
+  {
+    "id": "bk-11",
+    "title": "Letters to the Night Ferry",
+    "author": "Aaron Whitlock",
+    "genre": "historical",
+    "pages": 412,
+    "tags": [
+      "war",
+      "letters",
+      "romance",
+      "slow burn"
+    ],
+    "blurb": "Two strangers trade letters through a wartime ferry post and neither is who they claim to be."
+  },
+  {
+    "id": "bk-12",
+    "title": "Seven Minutes of Weather",
+    "author": "Noor Haddad",
+    "genre": "nonfiction",
+    "pages": 176,
+    "tags": [
+      "science",
+      "weather",
+      "essays",
+      "short"
+    ],
+    "blurb": "Essays on how forecasting really works, written by a former radio meteorologist."
+  },
+  {
+    "id": "bk-13",
+    "title": "The Long Way Round to Lisbon",
+    "author": "Fiona McAllister",
+    "genre": "travel",
+    "pages": 259,
+    "tags": [
+      "trains",
+      "humor",
+      "memoir",
+      "europe"
+    ],
+    "blurb": "A travel writer refuses to fly and takes eleven trains, two ferries, and one goat cart."
+  },
+  {
+    "id": "bk-14",
+    "title": "Moss and Circuitry",
+    "author": "Dev Anand Rao",
+    "genre": "science fiction",
+    "pages": 367,
+    "tags": [
+      "ecology",
+      "hopeful",
+      "climate",
+      "ensemble"
+    ],
+    "blurb": "Engineers and gardeners share a failing arcology and slowly learn each other's language."
+  },
+  {
+    "id": "bk-15",
+    "title": "The Baker of Little Ashford",
+    "author": "Margaret Oyelaran",
+    "genre": "cozy",
+    "pages": 221,
+    "tags": [
+      "bakery",
+      "village",
+      "romance",
+      "comforting"
+    ],
+    "blurb": "A burnt-out lawyer inherits a village bakery and a feud over who invented the sticky bun."
+  },
+  {
+    "id": "bk-16",
+    "title": "Whistle Down the Wire",
+    "author": "Callum Rhys",
+    "genre": "thriller",
+    "pages": 301,
+    "tags": [
+      "spy",
+      "fast",
+      "cold war",
+      "dark"
+    ],
+    "blurb": "A telephone engineer realises the hum on a Berlin line is someone counting."
+  }
+]
