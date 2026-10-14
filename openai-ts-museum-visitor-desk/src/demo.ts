@@ -1,6 +1,7 @@
 import { config } from "dotenv";
 import { fileURLToPath } from "node:url";
 import { VisitorDesk } from "./bot.js";
+import { opik } from "./tracing.js";
 import { DEMO_CONVERSATIONS } from "./conversations.js";
 import { loadFacts } from "./museum.js";
 
@@ -15,9 +16,13 @@ async function main(): Promise<void> {
     const desk = new VisitorDesk(conversationId, facts);
     for (const question of turns) {
       console.log(`\nVisitor: ${question}`);
-      console.log(`Desk:    ${await desk.answer(question)}`);
+      const turn = await desk.answer(question);
+      console.log(`Desk:    ${turn.reply}`);
+      console.log(`         [${turn.promptTokens} prompt / ${turn.completionTokens} completion tokens]`);
     }
   }
+  // Traces are sent in batches in the background; flush before exit or the last ones are lost.
+  await opik.flush();
 }
 
 main().catch((err) => {
