@@ -1,8 +1,10 @@
 from typing import Any
 
+import opik
 from pydantic_ai import Agent
 
 from .models import PropertyListing
+from .tracing import PROJECT_NAME
 
 MODEL = "openai:gpt-4o-mini"
 
@@ -17,6 +19,9 @@ agent = Agent(
 )
 
 
+# @opik.track opens the root span of the trace (named extract_listing, with the note as input
+# and the record as output); the Pydantic AI spans nest inside it.
+@opik.track(project_name=PROJECT_NAME)
 def extract_listing(note: str) -> dict[str, Any]:
     """One extraction: messy note in, typed listing out (as a plain dict)."""
     result = agent.run_sync(note)
