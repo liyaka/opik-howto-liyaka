@@ -8,3 +8,6 @@ dependencies = [
     "opik>=2.2.100",
     "python-dotenv>=1.0",
 ]
+
+[dependency-groups]
+dev = ["pytest>=8"]

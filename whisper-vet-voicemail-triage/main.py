@@ -59,9 +59,9 @@ Judge the pet's condition, not the caller's tone.
 
 @functools.cache
 def get_client() -> OpenAI:
-    # track_openai wraps the client: every TTS, transcription and chat call
-    # becomes a child span (llm spans carry token usage and cost) under
-    # whichever @opik.track function is running.
+    # track_openai wraps the client: the TTS and chat calls become llm child
+    # spans with token usage and cost. Transcription is not instrumented, so
+    # the @opik.track "transcribe" span below is what records it.
     return track_openai(OpenAI())
 
 

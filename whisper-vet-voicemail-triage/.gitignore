@@ -7,3 +7,5 @@ uv.lock
 *.egg-info
 # generated voicemail audio and transcripts, rebuilt on every run
 output/
+# local judge reports written by run_tests
+opik_test_suite_reports/
