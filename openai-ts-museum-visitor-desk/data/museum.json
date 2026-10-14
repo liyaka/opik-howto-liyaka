@@ -1,0 +1,27 @@
+{
+  "name": "The Harrowgate Museum of Tides and Tools",
+  "hours": [
+    "Tuesday to Sunday: 10:00 to 17:30 (last entry 16:45)",
+    "Thursday late opening: until 21:00 (last entry 20:15)",
+    "Closed on Mondays and on 25 December"
+  ],
+  "tickets": [
+    "Adult: 14 pounds. Concession (65+, students): 9 pounds. Under 12s: free.",
+    "Family pass (2 adults + up to 3 children): 36 pounds.",
+    "Thursday after 17:30 is pay-what-you-like, no booking needed.",
+    "Tickets can be changed to another day up to 24 hours ahead at no cost."
+  ],
+  "exhibits": [
+    "Ground floor: 'The Salt Engine', a working 1890s tidal pump, steam-demonstrated at 11:00 and 14:00.",
+    "First floor: 'Lanterns of the Estuary', 40 lighthouse lenses and ship's lamps (until 28 February).",
+    "Second floor: 'Hands On', a workshop gallery where visitors try rope work and brass rubbing; sessions on the hour, ages 6+.",
+    "Basement: 'Drowned Streets', a walk-through model of the old harbour town."
+  ],
+  "accessibility": [
+    "Step-free entrance on Wharf Lane; lifts reach every floor except the Drowned Streets basement, which has a steep ramp.",
+    "Wheelchairs and folding stools can be borrowed free at the front desk.",
+    "Quiet hour every Tuesday 10:00 to 11:00: lights dimmed, sounds off, the steam demonstration is skipped.",
+    "Assistance dogs are welcome. Large-print guides and a tactile floor plan are available at the desk."
+  ],
+  "escalation": "For anything not covered here, offer the front desk line (01632 960 418) rather than guessing."
+}

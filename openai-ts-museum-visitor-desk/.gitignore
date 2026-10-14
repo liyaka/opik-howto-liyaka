@@ -1,0 +1,4 @@
+node_modules/
+.env
+*.log
+.vitest-cache/
