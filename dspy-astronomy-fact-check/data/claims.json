@@ -1,0 +1,29 @@
+{
+  "train": [
+    {"claim": "Veldara lies about 41 light-years from Earth.", "verdict": "supported", "passage": "H-01"},
+    {"claim": "Veldara B is a larger star than Veldara A.", "verdict": "refuted", "passage": "H-01"},
+    {"claim": "Maret has a ring system.", "verdict": "not enough info", "passage": "none"},
+    {"claim": "The two Veldara stars take roughly 212 years to orbit each other.", "verdict": "supported", "passage": "H-02"},
+    {"claim": "Maret orbits its star at a distance of 1.2 AU.", "verdict": "refuted", "passage": "H-04"},
+    {"claim": "Veldara A produces violent flares every few years.", "verdict": "not enough info", "passage": "none"},
+    {"claim": "A year on Tessen lasts 18 days.", "verdict": "supported", "passage": "H-03"},
+    {"claim": "Free oxygen has been detected in Maret's atmosphere.", "verdict": "refuted", "passage": "H-04"},
+    {"claim": "Piper has lakes of liquid methane.", "verdict": "not enough info", "passage": "none"},
+    {"claim": "Orrin has nine known moons.", "verdict": "supported", "passage": "H-05"},
+    {"claim": "Calyx is a rocky planet.", "verdict": "refuted", "passage": "H-06"}
+  ],
+  "test": [
+    {"claim": "Piper is about 3,900 km in diameter.", "verdict": "supported", "passage": "H-07"},
+    {"claim": "Piper's atmosphere is thinner than Earth's.", "verdict": "refuted", "passage": "H-07"},
+    {"claim": "The Halden Space Telescope found Tessen in 2019.", "verdict": "supported", "passage": "H-08"},
+    {"claim": "Maret was discovered before Tessen.", "verdict": "refuted", "passage": "H-08"},
+    {"claim": "Veldara B hosts a Neptune-sized planet close to the star.", "verdict": "refuted", "passage": "H-09"},
+    {"claim": "Veldara A is younger than the Sun.", "verdict": "refuted", "passage": "H-10"},
+    {"claim": "Veldara A is about 0.38 times as luminous as the Sun.", "verdict": "supported", "passage": "H-11"},
+    {"claim": "Maret is tidally locked, with one face always toward its star.", "verdict": "refuted", "passage": "H-12"},
+    {"claim": "Tessen's dayside averages 640 K.", "verdict": "supported", "passage": "H-13"},
+    {"claim": "Liquid water has been found on Tessen.", "verdict": "not enough info", "passage": "none"},
+    {"claim": "Veldara A is surrounded by a debris disk.", "verdict": "not enough info", "passage": "none"},
+    {"claim": "Orrin has a ring system.", "verdict": "not enough info", "passage": "none"}
+  ]
+}
