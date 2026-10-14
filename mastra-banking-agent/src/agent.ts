@@ -15,5 +15,6 @@ export const bankingAgent = new Agent({
   name: "larkspur-banking-agent",
   instructions: SYSTEM_PROMPT,
   model: openai("gpt-4o-mini"),
-  tools: { getBalanceTool, listTransactionsTool, freezeCardTool },
+  // The key in this map becomes the span name in Opik (execute_tool get_balance), so use the snake_case tool names.
+  tools: { get_balance: getBalanceTool, list_transactions: listTransactionsTool, freeze_card: freezeCardTool },
 });

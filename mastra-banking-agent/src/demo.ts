@@ -15,7 +15,8 @@ if (!process.env.OPENAI_API_KEY) {
   process.exit(1);
 }
 
-const { mastra } = await import("./mastra.ts");
+// Import Mastra only after the env vars are loaded: the Opik exporter reads them when the module initializes.
+const { mastra, PROJECT_NAME } = await import("./mastra.ts");
 
 const REQUESTS = [
   "Hi, I'm Marisol. What's the balance on ACC-3001?",
@@ -32,5 +33,6 @@ for (const [i, request] of REQUESTS.entries()) {
   console.log(`Agent:    ${result.text}`);
 }
 
+// shutdown() flushes the OTel exporter; without it the last spans can be lost when the process exits.
 await mastra.shutdown();
-console.log("\nDone.");
+console.log(`\nDone. Open the "${PROJECT_NAME}" project in Opik to see the traces.`);
