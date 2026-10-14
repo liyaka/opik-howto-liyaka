@@ -10,6 +10,7 @@ from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.llms.openai import OpenAI
 from opik.integrations.llama_index import LlamaIndexCallbackHandler
 
+import suite
 import syllabi
 
 dotenv.load_dotenv(pathlib.Path(__file__).parents[1] / ".env")
@@ -58,6 +59,9 @@ def main() -> None:
         print(f"Q: {question}\nA: {ask(query_engine, question)}\n")
 
     # Traces are sent from a background thread; flush so a short script does not exit before they upload.
+    # Suite section: judge every question's assertions and record an experiment.
+    suite.print_result(suite.run_suite(query_engine, ask, PROJECT_NAME))
+
     opik.flush_tracker()
 
 
