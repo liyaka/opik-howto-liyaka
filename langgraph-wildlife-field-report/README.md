@@ -47,13 +47,14 @@ run:
 
 | agent      | passes | tokens | cost (USD) |
 |------------|-------:|-------:|-----------:|
-| planner    |      1 |    270 |   0.000088 |
-| researcher |      5 |  1,917 |   0.000520 |
-| writer     |      1 |  1,240 |   0.000386 |
-| total      |        |  3,427 |   0.000993 |
+| planner    |      1 |    660 |   0.000158 |
+| researcher |      5 |  1,995 |   0.000535 |
+| writer     |      1 |  1,254 |   0.000388 |
+| total      |        |  3,909 |   0.001080 |
 
 The CLI prints the same table, computed from the spans stored in Opik. Each extra planner
-question adds a whole researcher pass.
+question adds a whole researcher pass, and the planner row is larger than you might expect
+because its prompt lists every section of the corpus (see the retrieval gotcha below).
 
 ## Run it yourself
 
@@ -84,10 +85,18 @@ is now created lazily in `get_llm()`, which the tests monkeypatch.
 The tracer only sees LangChain runnables, so retrieval would show nothing. Decorate it:
 `@opik.track(name="retrieve_notes", type="tool")`.
 
+**The summary says "no significant population changes" although the sighting log shows elephants up from 168 to 212.**
+Open the first `retrieve_notes` span: the planner asked a vague question ("wildlife species showed
+significant population changes") and the keyword search returned sections that never mention
+elephants, so the researcher honestly reported nothing. Two fixes: `corpus.stem` folds plurals so
+"elephant" matches "Elephants", and the planner prompt now includes `outline(CORPUS)` so questions
+reuse the notes' own wording. After the fix the same span returns three `sighting-log-summary.md`
+sections and the summary quotes 212 vs 168. The cost is a bigger planner prompt (270 to 660 tokens).
+
 ## How it's put together
 
 - `field_report/state.py` - graph state and the planner's structured output.
-- `field_report/corpus.py` - loads `data/` and ranks sections by keyword weight.
+- `field_report/corpus.py` - loads `data/`, stems plurals, ranks sections by keyword weight, and outlines the sections for the planner.
 - `field_report/nodes.py` - planner, researcher, router and writer.
 - `field_report/graph.py` - the LangGraph wiring.
 - `field_report/tracing.py` - `OpikTracer`, `track_langgraph` and flush.
@@ -95,7 +104,7 @@ The tracer only sees LangChain runnables, so retrieval would show nothing. Decor
 - `field_report/cli.py` - the `field-report` entry point.
 - `data/` - five fictional documents.
 - `tests/test_field_report.py` - offline tests with a stub model: search, router, graph loop,
-  a traced function with tracking disabled, and the cost roll-up.
+  a traced function with tracking disabled, plural matching and the cost roll-up.
   Run `env -u OPENAI_API_KEY OPIK_TRACK_DISABLE=true uv run pytest`.
 
 ---

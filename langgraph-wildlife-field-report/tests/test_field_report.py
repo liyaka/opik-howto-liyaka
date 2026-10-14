@@ -57,3 +57,8 @@ def test_per_agent_rollup_groups_llm_spans_under_their_node():
     assert rows["researcher"] == {"passes": 2, "tokens": 120, "cost": 0.005}
     assert rows["planner"]["tokens"] == 100 and rows["writer"]["passes"] == 0
     assert "total" in costs.format_table(rows)
+
+
+def test_plural_forms_match_so_elephants_find_the_elephant_section():
+    hits = search("How many elephant sightings were logged?", load_corpus())
+    assert hits[0]["source"] == "sighting-log-summary.md"

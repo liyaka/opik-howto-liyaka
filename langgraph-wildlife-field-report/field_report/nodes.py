@@ -6,7 +6,7 @@ import opik
 from langchain_openai import ChatOpenAI
 
 from . import MODEL
-from .corpus import load_corpus, search
+from .corpus import load_corpus, outline, search
 from .state import FieldPlan, Finding, TeamState
 
 CORPUS = load_corpus()
@@ -32,7 +32,9 @@ def planner(state: TeamState) -> dict:
          "You lead a wildlife field-report team. The only sources are ranger notes, "
          "a sighting log summary, a waterhole and rainfall record and a patrol log "
          f"for {state['reserve']}. Break the request into 3 to 5 concrete questions "
-         "that cover wildlife, water, and threats."),
+         "that cover wildlife, water, and threats. Name the specific species, places or "
+         "measures the notes mention, using their wording, so a keyword search can find them. "
+         "Sections available:\n" + outline(CORPUS)),
         ("user", state["brief_request"]),
     ])
     return {"questions": plan.questions, "findings": []}

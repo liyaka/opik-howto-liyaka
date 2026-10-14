@@ -23,8 +23,22 @@ def load_corpus(data_dir: pathlib.Path = DATA_DIR) -> list[dict]:
     return entries
 
 
+def stem(word: str) -> str:
+    """Fold simple plurals so 'elephants' matches 'elephant' and 'snares' matches 'snare'."""
+    if len(word) > 4 and word.endswith("ies"):
+        return word[:-3] + "y"
+    if len(word) > 3 and word.endswith("s") and not word.endswith("ss"):
+        return word[:-1]
+    return word
+
+
 def tokens(text: str) -> set[str]:
-    return set(re.findall(r"[a-z0-9]+", text.lower())) - STOPWORDS
+    return {stem(w) for w in re.findall(r"[a-z0-9]+", text.lower()) if w not in STOPWORDS}
+
+
+def outline(corpus: list[dict]) -> str:
+    """One line per section ('file: heading') so the planner can ask questions the notes answer."""
+    return "\n".join(f"- {e['source']}: {e['text'].split('## ', 1)[1].splitlines()[0]}" for e in corpus)
 
 
 def search(query: str, corpus: list[dict], k: int = 3) -> list[dict]:
