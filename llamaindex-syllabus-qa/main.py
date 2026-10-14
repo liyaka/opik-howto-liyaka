@@ -3,14 +3,24 @@
 import pathlib
 
 import dotenv
+import opik
 from llama_index.core import Settings, SimpleDirectoryReader, VectorStoreIndex
+from llama_index.core.callbacks import CallbackManager
 from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.llms.openai import OpenAI
+from opik.integrations.llama_index import LlamaIndexCallbackHandler
 
 import syllabi
 
 dotenv.load_dotenv(pathlib.Path(__file__).parents[1] / ".env")
 dotenv.load_dotenv()
+
+PROJECT_NAME = "llamaindex-syllabus-qa"
+
+# Registering the handler on Settings makes every query a trace: a retrieve span (with its
+# embedding call) and a synthesize span ending in an llm span with token usage and cost.
+# Without it nothing reaches Opik; project_name sends the traces to this project, not "Default Project".
+Settings.callback_manager = CallbackManager([LlamaIndexCallbackHandler(project_name=PROJECT_NAME)])
 
 Settings.llm = OpenAI(model="gpt-4o-mini", temperature=0.0)
 Settings.embed_model = OpenAIEmbedding(model="text-embedding-3-small")
@@ -46,6 +56,9 @@ def main() -> None:
     query_engine = build_query_engine()
     for question in DEMO_QUESTIONS:
         print(f"Q: {question}\nA: {ask(query_engine, question)}\n")
+
+    # Traces are sent from a background thread; flush so a short script does not exit before they upload.
+    opik.flush_tracker()
 
 
 if __name__ == "__main__":
