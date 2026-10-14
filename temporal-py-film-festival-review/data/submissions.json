@@ -1,0 +1,26 @@
+[
+  {
+    "submission_id": "SUB-2101",
+    "title": "Salt Flats at Dusk",
+    "director": "Ines Marrow",
+    "email": "ines@example.com",
+    "runtime_min": 14,
+    "logline": "A retired surveyor walks the dry lakebed where her late husband charted the horizon, and finds his last survey stakes still standing in a perfect line."
+  },
+  {
+    "submission_id": "SUB-2102",
+    "title": "Night Shift Karaoke",
+    "director": "Theo Bannerjee",
+    "email": "theo@example.com",
+    "runtime_min": 9,
+    "logline": "Three hospital cleaners hold a secret karaoke contest in the empty cafeteria every night at 3 a.m., until a new security guard walks in on the final round."
+  },
+  {
+    "submission_id": "SUB-2103",
+    "title": "The Lighthouse Does Not Answer",
+    "director": "Mara Quillfeather",
+    "email": "mara@example.com",
+    "runtime_min": 21,
+    "logline": "A supply boat crew lands on a rock where the light has gone dark, and each of them hears the keeper's voice from a different room."
+  }
+]
