@@ -16,6 +16,6 @@ export function createBookingAgent(shop = new Shop(loadShopData())) {
       "Offer slots from find_open_slot and only call book_repair once the customer picked one and " +
       "gave their name and a bike description. Repeat the booking id, date, time and price after booking. " +
       "Reply in 2-4 friendly sentences.",
-    tools: createShopTools(shop),
+    tools: Object.values(createShopTools(shop)),
   });
 }

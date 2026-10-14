@@ -18,6 +18,10 @@ export function opikOtlpConfig(env: NodeJS.ProcessEnv = process.env) {
 }
 
 export function createObservability(env: NodeJS.ProcessEnv = process.env) {
+  // OPIK_TRACK_DISABLE=true installs no span processor at all, so tests and offline runs send nothing to Opik.
+  if (env.OPIK_TRACK_DISABLE === "true") {
+    return new VoltAgentObservability({ serviceName: DEFAULT_PROJECT, spanProcessors: [] });
+  }
   const exporter = new OTLPTraceExporter(opikOtlpConfig(env));
   // OTEL_GENAI_MAPPING=off sends VoltAgent's raw attributes, to see what Opik shows without the mapping.
   const mappingOn = env.OTEL_GENAI_MAPPING !== "off";

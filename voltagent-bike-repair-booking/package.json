@@ -9,7 +9,9 @@
   },
   "scripts": {
     "demo": "tsx src/demo.ts",
-    "typecheck": "tsc --noEmit"
+    "check": "tsx src/check.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
   },
   "dependencies": {
     "@opentelemetry/exporter-trace-otlp-http": "^0.205.0",

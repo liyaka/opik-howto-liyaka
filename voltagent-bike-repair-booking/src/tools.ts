@@ -45,5 +45,5 @@ export function createShopTools(shop: Shop) {
     execute: async ({ booking_id }) => shop.getBookingStatus(booking_id),
   });
 
-  return [checkServiceMenu, findOpenSlot, bookRepair, getBookingStatus];
+  return { checkServiceMenu, findOpenSlot, bookRepair, getBookingStatus };
 }
