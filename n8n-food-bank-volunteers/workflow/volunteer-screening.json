@@ -1,0 +1,163 @@
+{
+  "name": "Volunteer screening",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "nodes": [
+    {
+      "id": "5e1f0a20-7b3c-4d10-9a01-0000f00d0001",
+      "name": "Sign-up webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "5e1f0a20-7b3c-4d10-9a01-0000f00d00aa",
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "volunteer-signup",
+        "responseMode": "responseNode",
+        "options": {}
+      }
+    },
+    {
+      "id": "5e1f0a20-7b3c-4d10-9a01-0000f00d0002",
+      "name": "Screen volunteer (gpt-4o-mini)",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        240,
+        0
+      ],
+      "parameters": {
+        "resource": "text",
+        "operation": "message",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "id"
+        },
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You screen volunteer sign-ups for Riverbend Community Food Bank, a fictional food bank. Shifts: warehouse sorting (lifting up to 15 kg, age 16+), pantry distribution (talking with clients, age 16+), delivery driver (age 21+, must say they hold a driving licence), front desk (age 18+, computer basics). Volunteers under 16 can only join the monthly family-packing day with a guardian. Decide one of: approve (clearly fits at least one shift and gave enough detail), follow_up (could fit but something required is missing or unclear), not_a_fit (cannot fit any shift, or the sign-up is not a volunteer request, e.g. selling something). Never invent facts the volunteer did not state. Reply with a JSON object with exactly these keys: decision (\"approve\", \"follow_up\" or \"not_a_fit\"), suggested_shift (one shift name from the list, or \"none\"), reason (one sentence), follow_up_question (one question for the coordinator to ask, or \"\" if none is needed)."
+            },
+            {
+              "role": "user",
+              "content": "=Name: {{ $json.body.name }}\nAge: {{ $json.body.age }}\nAvailability: {{ $json.body.availability }}\nInterested in: {{ $json.body.interests }}\nAbout them: {{ $json.body.notes }}"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {
+          "temperature": 0
+        }
+      },
+      "credentials": {
+        "openAiApi": {
+          "id": "__OPENAI_CREDENTIAL_ID__",
+          "name": "OpenAI (volunteer screening)"
+        }
+      }
+    },
+    {
+      "id": "5e1f0a20-7b3c-4d10-9a01-0000f00d0003",
+      "name": "Build coordinator card",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        480,
+        0
+      ],
+      "parameters": {
+        "mode": "manual",
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c1",
+              "name": "volunteer",
+              "type": "string",
+              "value": "={{ $('Sign-up webhook').item.json.body.name }}"
+            },
+            {
+              "id": "c2",
+              "name": "decision",
+              "type": "string",
+              "value": "={{ $json.message.content.decision }}"
+            },
+            {
+              "id": "c3",
+              "name": "suggested_shift",
+              "type": "string",
+              "value": "={{ $json.message.content.suggested_shift }}"
+            },
+            {
+              "id": "c4",
+              "name": "reason",
+              "type": "string",
+              "value": "={{ $json.message.content.reason }}"
+            },
+            {
+              "id": "c5",
+              "name": "follow_up_question",
+              "type": "string",
+              "value": "={{ $json.message.content.follow_up_question }}"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "5e1f0a20-7b3c-4d10-9a01-0000f00d0004",
+      "name": "Reply to form",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        720,
+        0
+      ],
+      "parameters": {
+        "respondWith": "firstIncomingItem",
+        "options": {}
+      }
+    }
+  ],
+  "connections": {
+    "Sign-up webhook": {
+      "main": [
+        [
+          {
+            "node": "Screen volunteer (gpt-4o-mini)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Screen volunteer (gpt-4o-mini)": {
+      "main": [
+        [
+          {
+            "node": "Build coordinator card",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build coordinator card": {
+      "main": [
+        [
+          {
+            "node": "Reply to form",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
