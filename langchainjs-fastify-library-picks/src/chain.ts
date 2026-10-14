@@ -7,6 +7,7 @@ import { RunnableLambda, RunnableSequence } from "@langchain/core/runnables";
 import type { RunnableConfig } from "@langchain/core/runnables";
 import type { BaseChatModel } from "@langchain/core/language_models/chat_models";
 import type { BaseMessage } from "@langchain/core/messages";
+import type { OpikCallbackHandler } from "opik-langchain";
 import { formatCandidates, searchCatalog } from "./catalog.js";
 import type { Book } from "./catalog.js";
 
@@ -20,6 +21,7 @@ Keep replies under 80 words; this is a small chat widget.`;
 export interface Session {
   history: BaseMessage[];
   readerMessages: string[];
+  opikHandler?: OpikCallbackHandler;
 }
 
 export function createChain(

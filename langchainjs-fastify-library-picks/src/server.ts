@@ -11,10 +11,22 @@ import type { BaseChatModel } from "@langchain/core/language_models/chat_models"
 import { createChain } from "./chain.js";
 import type { Session } from "./chain.js";
 import { loadCatalog } from "./catalog.js";
+import { Opik } from "opik";
+import { OpikCallbackHandler } from "opik-langchain";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.join(here, "../.env"), quiet: true });
 dotenv.config({ path: path.join(here, "../../.env"), quiet: true });
+
+export const PROJECT_NAME = "langchainjs-fastify-library-picks";
+
+// One shared client: every reader's traces batch through it, and flush() on it
+// is what guarantees the last turns reach Opik before the process exits.
+export const opikClient = new Opik({ projectName: PROJECT_NAME });
+
+export async function flushOpik(): Promise<void> {
+  await opikClient.flush();
+}
 
 interface ChatBody {
   message?: unknown;
@@ -39,11 +51,21 @@ export function buildApp(llm?: BaseChatModel): FastifyInstance {
     }
     let session = sessions.get(sessionId);
     if (!session) {
-      session = { history: [], readerMessages: [] };
+      session = {
+        history: [],
+        readerMessages: [],
+        // threadId = sessionId groups this reader's turns into one Opik thread.
+        opikHandler: new OpikCallbackHandler({
+          client: opikClient,
+          threadId: sessionId,
+        }),
+      };
       sessions.set(sessionId, session);
     }
     try {
       const answer = await chain.invoke(message, {
+        // The handler turns the chain run into a trace (root run) with child spans.
+        callbacks: session.opikHandler ? [session.opikHandler] : [],
         runName: "library-picks-turn",
         configurable: { sessionId },
       });
@@ -67,5 +89,11 @@ if (isMain) {
   const port = Number(process.env.PORT ?? 3161);
   const app = buildApp();
   await app.listen({ port });
+  for (const signal of ["SIGINT", "SIGTERM"] as const) {
+    process.on(signal, async () => {
+      await flushOpik();
+      process.exit(0);
+    });
+  }
   console.log(`Library picks chat: POST http://localhost:${port}/chat`);
 }

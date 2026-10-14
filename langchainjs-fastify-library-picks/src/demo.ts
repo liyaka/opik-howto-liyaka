@@ -1,4 +1,4 @@
-import { buildApp } from "./server.js";
+import { buildApp, flushOpik } from "./server.js";
 
 const PORT = Number(process.env.PORT ?? 3162);
 
@@ -40,6 +40,7 @@ async function main() {
       console.log(`Picker: ${await chat(sessionId, message)}`);
     }
   }
+  await flushOpik(); // send buffered traces before the process exits
   await app.close();
 }
 
