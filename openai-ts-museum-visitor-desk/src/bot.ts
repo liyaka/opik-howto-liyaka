@@ -1,5 +1,4 @@
 import OpenAI from "openai";
-import { trackOpenAI } from "opik-openai";
 import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
 import { buildSystemPrompt, type MuseumFacts } from "./museum.js";
 import { opik } from "./tracing.js";
@@ -50,20 +49,35 @@ export class VisitorDesk {
       input: { question },
     });
 
-    // trackOpenAI with a parent trace: the completion becomes an llm span under this
-    // trace, carrying model, token usage and (backend-computed) cost.
-    const client = trackOpenAI(this.client, {
-      client: opik,
-      parent: trace,
-      generationName: "answer-visitor",
-    }) as ChatClient;
+    // The llm span is logged by hand: opik-openai records the completion as a "general"
+    // span, which Opik never prices. Type "llm" plus model, provider and usage is what
+    // makes the backend fill in total_estimated_cost for this turn.
+    const span = trace.span({
+      name: "answer-visitor",
+      type: "llm",
+      model: MODEL,
+      provider: "openai",
+      input: { messages: [...this.messages] },
+    });
 
-    const response = await client.chat.completions.create({
+    const response = await this.client.chat.completions.create({
       model: MODEL,
       messages: this.messages,
     });
     const reply = response.choices[0]?.message.content ?? "";
     this.messages.push({ role: "assistant", content: reply });
+
+    const promptTokens = response.usage?.prompt_tokens ?? 0;
+    const completionTokens = response.usage?.completion_tokens ?? 0;
+    span.update({
+      output: { reply },
+      usage: {
+        prompt_tokens: promptTokens,
+        completion_tokens: completionTokens,
+        total_tokens: promptTokens + completionTokens,
+      },
+    });
+    span.end();
 
     // Output on the trace is what the thread view shows as the assistant message.
     trace.update({ output: { reply } });
@@ -71,8 +85,8 @@ export class VisitorDesk {
     return {
       reply,
       traceId: trace.data.id,
-      promptTokens: response.usage?.prompt_tokens ?? 0,
-      completionTokens: response.usage?.completion_tokens ?? 0,
+      promptTokens,
+      completionTokens,
     };
   }
 }
