@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "openai-agents>=0.23",
+    "opik>=2.2.100",
     "python-dotenv>=1.0",
 ]
 

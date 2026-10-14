@@ -1,15 +1,24 @@
 """Run scripted multi-turn claim conversations through the claims desk."""
 
+import os
 from pathlib import Path
 
 from dotenv import load_dotenv
 
 load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 load_dotenv()
+# The project name must be set before opik is imported; every trace lands in this project.
+os.environ.setdefault("OPIK_PROJECT_NAME", "openai-agents-insurance-claims")
 
-from agents import Runner
+import opik
+from agents import Runner, set_trace_processors
+from opik.integrations.openai.agents import OpikTracingProcessor
 
 from desk import triage_agent
+
+# OpikTracingProcessor replaces the SDK's default exporter: each agent run becomes an Opik trace,
+# with agent, handoff, function (tool) and generation (llm) spans nested under it.
+set_trace_processors([OpikTracingProcessor()])
 
 CONVERSATIONS = {
     "auto-fender-bender": [
@@ -39,4 +48,8 @@ def run_demo() -> None:
 
 
 if __name__ == "__main__":
-    run_demo()
+    try:
+        run_demo()
+    finally:
+        # Traces are sent from a background thread; flush so a short script does not exit first.
+        opik.flush_tracker()
