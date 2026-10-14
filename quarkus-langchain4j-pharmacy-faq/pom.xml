@@ -44,6 +44,12 @@
       <groupId>io.quarkiverse.langchain4j</groupId>
       <artifactId>quarkus-langchain4j-openai</artifactId>
     </dependency>
+    <!-- Opik: quarkus-opentelemetry makes Quarkus LangChain4j emit spans (AI-service call and an llm
+         span per chat completion, with model, token usage and provider) and ships them over OTLP. -->
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-opentelemetry</artifactId>
+    </dependency>
   </dependencies>
 
   <build>

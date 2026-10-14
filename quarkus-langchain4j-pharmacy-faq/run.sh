@@ -35,6 +35,7 @@ for q in "${QUESTIONS[@]}"; do
   echo
 done
 
+# Opik: SIGTERM lets the OpenTelemetry batch processor flush pending spans; a kill -9 would lose them.
 kill "$APP_PID"
 wait "$APP_PID" 2>/dev/null || true
 trap - EXIT
