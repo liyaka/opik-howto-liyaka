@@ -1,13 +1,20 @@
 services:
   n8n:
-    image: n8nio/n8n:2.41.7
+    build: .
     container_name: n8n-food-bank-volunteers
     ports:
       - "5678:5678"
     environment:
+      # OTLP target for the n8n-observability hooks. projectName routes every execution into this Opik project;
+      # Authorization is only needed for Opik Cloud (OPIK_API_KEY), a local Opik ignores it.
+      OTEL_EXPORTER_OTLP_ENDPOINT: "${OPIK_OTLP_ENDPOINT:-http://host.docker.internal:5173/api/v1/private/otel}"
+      OTEL_EXPORTER_OTLP_HEADERS: "Authorization=${OPIK_API_KEY:-},Comet-Workspace=${OPIK_WORKSPACE:-default},projectName=n8n-food-bank-volunteers"
+      N8N_OTEL_SERVICE_NAME: "n8n-food-bank-volunteers"
       N8N_SECURE_COOKIE: "false"
       N8N_RUNNERS_ENABLED: "true"
       N8N_DIAGNOSTICS_ENABLED: "false"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - n8n_food_bank_data:/home/node/.n8n
 
