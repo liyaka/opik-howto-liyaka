@@ -1,0 +1,26 @@
+{
+  "name": "opik-ts-podcast-title-prompts",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Podcast episode-title generator with a versioned Opik prompt and a test suite run per version",
+  "scripts": {
+    "demo": "tsx src/main.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "openai": "^6.0.1",
+    "opik": "2.2.100"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  }
+}
