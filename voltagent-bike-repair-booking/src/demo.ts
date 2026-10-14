@@ -24,9 +24,12 @@ if (!process.env.OPENAI_API_KEY) {
 
 const { VoltAgent } = await import("@voltagent/core");
 const { createBookingAgent } = await import("./agent.ts");
+const { createObservability } = await import("./telemetry/setup.ts");
 
 const agent = createBookingAgent();
-new VoltAgent({ agents: { agent } });
+// Passing observability to VoltAgent routes every agent run, llm call and tool call through the Opik exporter.
+const observability = createObservability();
+new VoltAgent({ agents: { agent }, observability });
 
 export const REQUESTS = [
   "What would it cost to get my brakes sorted? They feel spongy.",
@@ -40,4 +43,7 @@ for (const [i, request] of REQUESTS.entries()) {
   const result = await agent.generateText(request);
   console.log(`Assistant: ${result.text}`);
 }
+// Flush the batch processor so the last spans reach Opik before the process exits; otherwise they are lost.
+await observability.shutdown();
+console.log('\nDone. Open the "voltagent-bike-repair-booking" project in Opik to see the traces.');
 process.exit(0);
