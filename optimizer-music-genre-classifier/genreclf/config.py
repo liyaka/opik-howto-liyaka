@@ -9,4 +9,4 @@ PROJECT_NAME = "optimizer-music-genre-classifier"
 MODEL = "gpt-4o-mini"
 DATASET_NAME = "optimizer-music-genre-classifier-songs"
 LIBRARY_PROMPT_NAME = "music-genre-classifier"
-MAX_TRIALS = 5  # candidate prompts the optimizer may evaluate: the budget cap
+MAX_TRIALS = 8  # candidate prompts the optimizer may evaluate: the budget cap

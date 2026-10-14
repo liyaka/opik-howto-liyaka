@@ -6,6 +6,7 @@ requires-python = ">=3.12"
 dependencies = [
     "openai>=1.60.0",
     "opik>=2.2.100",
+    "opik-optimizer>=3.2.0",
     "python-dotenv>=1.0.1",
 ]
 
