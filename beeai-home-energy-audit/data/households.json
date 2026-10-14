@@ -1,0 +1,262 @@
+{
+  "households": [
+    {
+      "id": "HH-101",
+      "family": "Okafor",
+      "home": "3-bedroom townhouse, 1,650 sq ft, built 2009",
+      "tariff_id": "TOU-EVENING",
+      "meter_readings_kwh": [
+        {
+          "month": "2025-08",
+          "kwh": 610
+        },
+        {
+          "month": "2025-09",
+          "kwh": 570
+        },
+        {
+          "month": "2025-10",
+          "kwh": 540
+        },
+        {
+          "month": "2025-11",
+          "kwh": 585
+        },
+        {
+          "month": "2025-12",
+          "kwh": 640
+        },
+        {
+          "month": "2026-01",
+          "kwh": 1190
+        }
+      ],
+      "appliances": [
+        {
+          "name": "Level 2 EV charger",
+          "watts": 7200,
+          "hours_per_day": 2.5,
+          "notes": "installed 2025-12-28, plugs in at 18:30 when the driver gets home"
+        },
+        {
+          "name": "Gas furnace with electric blower",
+          "watts": 600,
+          "hours_per_day": 6,
+          "notes": "unchanged"
+        },
+        {
+          "name": "Refrigerator",
+          "watts": 150,
+          "hours_per_day": 8,
+          "notes": "2019 model"
+        },
+        {
+          "name": "Electric dryer",
+          "watts": 3000,
+          "hours_per_day": 0.7,
+          "notes": "runs weekday evenings"
+        }
+      ]
+    },
+    {
+      "id": "HH-102",
+      "family": "Lindqvist",
+      "home": "2-bedroom condo, 1,100 sq ft, built 2015",
+      "tariff_id": "FLAT-STD",
+      "meter_readings_kwh": [
+        {
+          "month": "2025-08",
+          "kwh": 430
+        },
+        {
+          "month": "2025-09",
+          "kwh": 440
+        },
+        {
+          "month": "2025-10",
+          "kwh": 610
+        },
+        {
+          "month": "2025-11",
+          "kwh": 790
+        },
+        {
+          "month": "2025-12",
+          "kwh": 930
+        },
+        {
+          "month": "2026-01",
+          "kwh": 980
+        }
+      ],
+      "appliances": [
+        {
+          "name": "Heat pump, 5-ton (oversized for the space)",
+          "watts": 4200,
+          "hours_per_day": 6,
+          "notes": "starts and stops about 9 times an hour; air filter last changed 14 months ago; outdoor coil clogged with cottonwood fluff"
+        },
+        {
+          "name": "Electric water heater",
+          "watts": 4500,
+          "hours_per_day": 0.8,
+          "notes": "no timer"
+        },
+        {
+          "name": "Refrigerator",
+          "watts": 120,
+          "hours_per_day": 8,
+          "notes": "2021 model"
+        }
+      ]
+    },
+    {
+      "id": "HH-103",
+      "family": "Barzani",
+      "home": "4-bedroom detached house, 2,400 sq ft, built 1988",
+      "tariff_id": "FLAT-STD",
+      "meter_readings_kwh": [
+        {
+          "month": "2025-08",
+          "kwh": 1020
+        },
+        {
+          "month": "2025-09",
+          "kwh": 990
+        },
+        {
+          "month": "2025-10",
+          "kwh": 940
+        },
+        {
+          "month": "2025-11",
+          "kwh": 960
+        },
+        {
+          "month": "2025-12",
+          "kwh": 1010
+        },
+        {
+          "month": "2026-01",
+          "kwh": 1030
+        }
+      ],
+      "appliances": [
+        {
+          "name": "Pool pump (single speed)",
+          "watts": 1100,
+          "hours_per_day": 24,
+          "notes": "pool is covered all winter; pump never switched to a schedule"
+        },
+        {
+          "name": "Chest freezer in garage",
+          "watts": 220,
+          "hours_per_day": 12,
+          "notes": "1996 model, door gasket cracked"
+        },
+        {
+          "name": "Home office rack (NAS and switch)",
+          "watts": 90,
+          "hours_per_day": 24,
+          "notes": "always on"
+        },
+        {
+          "name": "Refrigerator",
+          "watts": 180,
+          "hours_per_day": 9,
+          "notes": "2012 model"
+        }
+      ]
+    }
+  ],
+  "tariffs": [
+    {
+      "id": "FLAT-STD",
+      "name": "Standard flat rate",
+      "peak_rate_per_kwh": 0.17,
+      "offpeak_rate_per_kwh": 0.17,
+      "peak_window": "none",
+      "fixed_monthly_fee": 9
+    },
+    {
+      "id": "TOU-EVENING",
+      "name": "Time-of-use with evening peak",
+      "peak_rate_per_kwh": 0.46,
+      "offpeak_rate_per_kwh": 0.11,
+      "peak_window": "17:00-21:00 on weekdays",
+      "fixed_monthly_fee": 12
+    }
+  ],
+  "fixes": [
+    {
+      "id": "ev-offpeak-schedule",
+      "label": "Schedule EV charging to start after 21:00",
+      "kwh_saved_per_month": 0,
+      "shift_peak_kwh_to_offpeak_per_month": 540,
+      "upfront_cost": 0,
+      "applies_to": [
+        "HH-101"
+      ]
+    },
+    {
+      "id": "clean-heat-pump-coil-and-filter",
+      "label": "Replace the air filter and wash the outdoor coil",
+      "kwh_saved_per_month": 90,
+      "shift_peak_kwh_to_offpeak_per_month": 0,
+      "upfront_cost": 40,
+      "applies_to": [
+        "HH-102"
+      ]
+    },
+    {
+      "id": "heat-pump-resize",
+      "label": "Replace the 5-ton heat pump with a 2.5-ton variable-speed unit",
+      "kwh_saved_per_month": 260,
+      "shift_peak_kwh_to_offpeak_per_month": 0,
+      "upfront_cost": 7800,
+      "applies_to": [
+        "HH-102"
+      ]
+    },
+    {
+      "id": "water-heater-timer",
+      "label": "Fit a timer to the electric water heater",
+      "kwh_saved_per_month": 55,
+      "shift_peak_kwh_to_offpeak_per_month": 0,
+      "upfront_cost": 35,
+      "applies_to": [
+        "HH-102"
+      ]
+    },
+    {
+      "id": "pool-pump-schedule",
+      "label": "Run the pool pump 4 hours a day instead of 24",
+      "kwh_saved_per_month": 660,
+      "shift_peak_kwh_to_offpeak_per_month": 0,
+      "upfront_cost": 0,
+      "applies_to": [
+        "HH-103"
+      ]
+    },
+    {
+      "id": "replace-garage-freezer",
+      "label": "Replace the 1996 chest freezer",
+      "kwh_saved_per_month": 38,
+      "shift_peak_kwh_to_offpeak_per_month": 0,
+      "upfront_cost": 450,
+      "applies_to": [
+        "HH-103"
+      ]
+    },
+    {
+      "id": "smart-power-strip-office",
+      "label": "Put the office rack on a smart power strip",
+      "kwh_saved_per_month": 12,
+      "shift_peak_kwh_to_offpeak_per_month": 0,
+      "upfront_cost": 25,
+      "applies_to": [
+        "HH-103"
+      ]
+    }
+  ]
+}
