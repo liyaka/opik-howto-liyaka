@@ -1,0 +1,26 @@
+{
+  "AUT-20417": {
+    "holder": "Marisol Quenby",
+    "kind": "auto",
+    "active": true,
+    "coverages": {"collision": {"limit": 15000, "deductible": 500}, "glass": {"limit": 1200, "deductible": 0}, "theft": {"limit": 9000, "deductible": 750}}
+  },
+  "HOM-77310": {
+    "holder": "Tobias Wren",
+    "kind": "home",
+    "active": true,
+    "coverages": {"water_damage": {"limit": 25000, "deductible": 1000}, "fire": {"limit": 250000, "deductible": 1000}, "theft": {"limit": 8000, "deductible": 500}}
+  },
+  "TRV-55902": {
+    "holder": "Ines Calloway",
+    "kind": "travel_medical",
+    "active": true,
+    "coverages": {"emergency_care": {"limit": 100000, "deductible": 100}, "trip_cancellation": {"limit": 3000, "deductible": 0}}
+  },
+  "AUT-31188": {
+    "holder": "Dmitri Okafor",
+    "kind": "auto",
+    "active": false,
+    "coverages": {"collision": {"limit": 10000, "deductible": 500}}
+  }
+}

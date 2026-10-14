@@ -1,0 +1,17 @@
+[project]
+name = "openai-agents-insurance-claims"
+version = "0.1.0"
+description = "Insurance claims intake: a triage agent hands off to specialist agents that call policy and claim tools"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "openai-agents>=0.23",
+    "python-dotenv>=1.0",
+]
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
